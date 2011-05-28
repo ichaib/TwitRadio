@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     str.gsub(/#\w*/,"").gsub(/@\w*/,"").gsub(/http.*/,"")
   end
 
-	def getSongFromSoundCloud(query)
+  def getSongFromSoundCloud(query)
     client = Soundcloud.new(:client_id => 'Kym1pcyEMdeHgzYvigIwsQ')
     tracks = client.get('/tracks', :q => query)
     return tracks[0]
