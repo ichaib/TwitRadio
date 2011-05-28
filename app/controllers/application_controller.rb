@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
     list = Array.new
 	  hashtag = "#nowplaying"
 	  j=0
-    while j < 10 do
+    #while j < 10 do
       tweet = getTweet(hashtag)
-      if hasSong(tweet, hashtag) do
-        list.push(updateSong(tweet, hashtag)) 
+      if hasSong(tweet, hashtag)== true then
+        list.push(updateSong(tweet, hashtag))
         j++
       end
-    end
+    #end
   end
 
   def getTweet(query)
@@ -36,30 +36,22 @@ class ApplicationController < ActionController::Base
 		temp = getSong(query)
 		!temp.nil?
 	end
-	
 	def updateSong(tweet,hashtag)
-			song = Song.new
-			query = getSongQuery(tweet.text,hashtag)
-			temp = nil
-			temp = getSong(query)
-			
-			song.title = !temp.nil? ? temp.title : "nil title"
-			song.url = !temp.nil? ? temp.permalink_url : "nil link"
-			song.tweet = query
-			return song
-		
-					
+    song = Song.new
+    query = getSongQuery(tweet.text,hashtag)
+    temp = getSong(query)
+    song.title = !temp.nil? ? temp.title : ""
+    song.url = !temp.nil? ? temp.permalink_url : ""
+    song.tweet = query
   end
 	
-	def clean(str, query)
-		return str.gsub(/#\w*/,"").gsub(/@\w*/,"").gsub(/http.*/,"")
-	end
+  def clean(str, query)
+    str.gsub(/#\w*/,"").gsub(/@\w*/,"").gsub(/http.*/,"")
+  end
 
 	def getSongFromSoundCloud(query)
-		
-		client = Soundcloud.new(:client_id => 'Kym1pcyEMdeHgzYvigIwsQ')
-		# get 10 hottest tracks
-		tracks = client.get('/tracks', :q => query)
-		return tracks[0]
-	end	
+    client = Soundcloud.new(:client_id => 'Kym1pcyEMdeHgzYvigIwsQ')
+    tracks = client.get('/tracks', :q => query)
+    return tracks[0]
+  end	
 end
