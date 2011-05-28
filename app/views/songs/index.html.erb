@@ -4,7 +4,7 @@
 	<% @songs.each do |song| %>
 		<div>  
 		  <p>
-			<b><%= i %> - <%= song.title %></b> by <%= song.artist %><br/>
+			<b><%= i %> - <%= song.title %></b><br/>
 		 	Tweet: <%= song.tweet %><br/>
 		 	URL: <%= song.url %>
 			<% i += 1 %> </p>

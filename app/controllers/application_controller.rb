@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
 	require "rubygems"
 	require 'twitter'
+	require 'soundcloud'
+
 
 
  
@@ -11,9 +13,7 @@ class ApplicationController < ActionController::Base
 		hashtag = "#nowplaying"
 		tweets = getTweets(hashtag)
     tweets.each do |tweet|  
-		      query = getSong(tweet.text,hashtag)
-					url = getUrl(query)
-				  list.push(updateSong(url, query))
+				  list.push(updateSong(tweet))
 		end 
     #list = tweets
 		#list = Song.all
@@ -26,24 +26,31 @@ class ApplicationController < ActionController::Base
 		search.containing(query).result_type("recent").per_page(10)
 		end
   
-  def getSong(tweet,hashtag)
+  def getSongQuery(tweet,hashtag)
 		return clean(tweet,hashtag)
   end
 
-  def getUrl(query)
-		query
+  def getSong(query)
+		getSongFromSoundCloud(query)
   end
   
-  def updateSong(url, tweet)
+  def updateSong(tweet,hashtag)
 		song = Song.new
-		song.title = "Just try to figure it out for the moment"
-		song.url = "will come from soundcloud"
-		song.artist = "someone but not me"
-		song.tweet = tweet
+		query = getSongQuery(tweet.text,hashtag)
+		temp = getSong(query)
+
+		song.title = temp.title
+		song.url = temp.permalink_url
+		song.tweet = tweet.text
 		return song			
   end
 	
 	def clean(str, query)
 		return str.gsub(/#\w*/,"").gsub(/@\w*/,"").gsub(/http.*/,"")
-	end		
+	end
+
+	def getSongFromSoundCloud(query)
+		sc_client = Soundcloud.register
+		tracks = sc_client.Track.find(:all,:params => {:order => 'hotness', :limit => 1})	
+	end	
 end
