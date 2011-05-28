@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110528104002) do
+ActiveRecord::Schema.define(:version => 20110528213411) do
 
   create_table "musics", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(:version => 20110528104002) do
     t.string   "artist"
     t.string   "tweet"
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tracks", :force => true do |t|
+    t.string   "title"
+    t.string   "tweetedby"
+    t.string   "tweet"
+    t.string   "tweeturl"
+    t.string   "url"
+    t.string   "picture"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

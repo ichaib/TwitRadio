@@ -1,11 +1,13 @@
 Twitradio::Application.routes.draw do
 
+  resources :tracks
+
   resources :musics
 
   resources :songs
 
   	get "pages/home"
-  	root :to => "songs#index"
+  	root :to => "tracks#index"
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

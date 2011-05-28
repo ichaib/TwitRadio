@@ -1,12 +1,12 @@
-<h1>Listing songs</h1>
-<% unless @songs.empty?  %>
+<h1>TwitRadio !</h1>
+<% unless @tracks.empty?  %>
 	<% i = 1 %> 
-	<% @songs.each do |song| %>
+	<% @tracks.each do |track| %>
 		<div>  
 		  <p>
-			<b><%= i %> - <%= song.title %></b><br/>
-		 	Tweet: <%= song.tweet %><br/>
-		 	URL: <%= song.url %>
+			<img style="display: inline; margin-left: 0px; margin-right: 0px" align="left" src=<%= track.picture %> width="101" height="109" />
+			<h2><b><%= i %> - <%= track.title %></b></h2>
+		 	Tweeted By: <a href= '<%= track.tweeturl %>><%= track.tweetedby %></a><br/>
 			<% i += 1 %> </p>
 		</div>
 	<% end %>
@@ -14,5 +14,5 @@
 
 <br />
 
-<%= link_to 'Refresh', root_path %><br />
-<%= link_to 'New', new_song_path %>
+<%= link_to 'Next >>', root_path %><br />
+

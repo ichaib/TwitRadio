@@ -34,13 +34,17 @@ class ApplicationController < ActionController::Base
 		!temp.nil?
   end
   def updateSong(tweet,hashtag)
-    song = Song.new
+    track = Track.new
     query = getSongQuery(tweet.text,hashtag)
     temp = getSong(query)
-    song.title = !temp.nil? ? temp.title : ""
-    song.url = !temp.nil? ? temp.permalink_url : ""
-    song.tweet = query
-    return song
+    track.title = !temp.nil? ? temp.title : ""
+    track.url = !temp.nil? ? temp.permalink_url : ""
+
+    track.picture = temp.artwork_url
+    track.tweet = tweet.text
+    track.tweetedby = tweet.from_user
+    track.tweeturl = "http://twitter.com/"+tweet.from_user
+    return track
   end
 	
   def clean(str, query)
