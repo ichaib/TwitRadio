@@ -3,20 +3,19 @@ class ApplicationController < ActionController::Base
 
 	require "rubygems"
 	require 'twitter'
- 
+
   def refresh
     list = Array.new
     hashtag = "#nowplaying"
     j=0
     while j < 10 do
       tweet = getTweet(hashtag)
-      if hasSong(tweet, hashtag) == true then
-        list.push(updateSong(tweet, hashtag))
+      if hasSong(tweet, hashtag) then
+        list.push(updateSong(tweet, hastag))
         j++
       end
     end
   end
-
   def getTweet(query)
 		search = Twitter::Search.new
 		return search.containing(query).result_type("recent").fetch.first
@@ -29,13 +28,11 @@ class ApplicationController < ActionController::Base
   def getSong(query)
 		getSongFromSoundCloud(query)
   end
-  
-	
-	def hasSong(tweet,hashtag)
+  def hasSong(tweet,hashtag)
 		query = getSongQuery(tweet.text,hashtag)
 		temp = getSong(query)
 		!temp.nil?
-	end
+  end
   def updateSong(tweet,hashtag)
     song = Song.new
     query = getSongQuery(tweet.text,hashtag)
@@ -52,6 +49,6 @@ class ApplicationController < ActionController::Base
   def getSongFromSoundCloud(query)
     client = Soundcloud.new(:client_id => 'Kym1pcyEMdeHgzYvigIwsQ')
     tracks = client.get('/tracks', :q => query)
-    return tracks[0]
+    tracks[0]
   end	
 end
