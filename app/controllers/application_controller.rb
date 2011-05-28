@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
  
   def refresh
     list = Array.new
-	  hashtag = "#nowplaying"
-	  j=0
+    hashtag = "#nowplaying"
+    j=0
     while j < 10 do
       tweet = getTweet(hashtag)
-      if hasSong(tweet, hashtag)== true then
+      if hasSong(tweet, hashtag) == true then
         list.push(updateSong(tweet, hashtag))
         j++
       end
