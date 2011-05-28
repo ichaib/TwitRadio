@@ -7,7 +7,7 @@ gem 'rails', '3.0.0'
 
 gem 'rake', '~> 0.8.7'
 gem 'twitter'
-gem 'soundcloud-ruby-api-wrapper'
+gem 'soundcloud'
 
 
 gem 'sqlite3-ruby', :require => 'sqlite3'

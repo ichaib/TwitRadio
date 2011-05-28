@@ -1,5 +1,5 @@
 <h1>Listing songs</h1>
-<% if @songs %>
+<% unless @songs.empty?  %>
 	<% i = 1 %> 
 	<% @songs.each do |song| %>
 		<div>  
