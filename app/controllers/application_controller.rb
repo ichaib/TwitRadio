@@ -1,20 +1,20 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-	require "rubygems"
-	require 'twitter'
+  require "rubygems"
+  require 'twitter'
+  
 
   def refresh
     list = Array.new
     hashtag = "#nowplaying"
-    j=0
-    while j < 10 do
-      tweet = getTweet(hashtag)
-      if hasSong(tweet, hashtag) then
-        list.push(updateSong(tweet, hastag))
-        j++
-      end
+    tweet = getTweet(hashtag)
+    if hasSong(tweet, hashtag) == true
+      list.push(updateSong(tweet, hashtag)) 
+    else
+      refresh
     end
+
+
   end
   def getTweet(query)
 		search = Twitter::Search.new
@@ -40,6 +40,7 @@ class ApplicationController < ActionController::Base
     song.title = !temp.nil? ? temp.title : ""
     song.url = !temp.nil? ? temp.permalink_url : ""
     song.tweet = query
+    return song
   end
 	
   def clean(str, query)
