@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @music.title %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%= @music.artist %>
+</p>
+
+<p>
+  <b>Tweet:</b>
+  <%= @music.tweet %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @music.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_music_path(@music) %> |
+<%= link_to 'Back', musics_path %>

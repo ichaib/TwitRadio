@@ -1,0 +1,18 @@
+<h1>Listing songs</h1>
+<% if @songs %>
+	<% i = 1 %> 
+	<% @songs.each do |song| %>
+		<div>  
+		  <p>
+			<b><%= i %> - <%= song.title %></b> by <%= song.artist %><br/>
+		 	Tweet: <%= song.tweet %><br/>
+		 	URL: <%= song.url %>
+			<% i += 1 %> </p>
+		</div>
+	<% end %>
+<% end %>
+
+<br />
+
+<%= link_to 'Refresh', root_path %><br />
+<%= link_to 'New', new_song_path %>
