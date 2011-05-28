@@ -7,20 +7,21 @@ class ApplicationController < ActionController::Base
   def refresh
     list = Array.new
 		hashtag = "#nowplaying"
-		tweets = getTweets(hashtag)
-    tweets.each do |tweet|  
-				  list.push(updateSong(tweet, hashtag))
-		end 
-    #list = tweets
-		#list = Song.all
-		return list
-
+		j=0
+		while j < 10 do
+			tweet = getTweet(hashtag)
+			if hasSong(tweet, hashtag) do
+		  	list.push(updateSong(tweet, hashtag)) 
+		  	j++
+			end
+		end
+		
   end
 
-  def getTweets(query)
+  def getTweet(query)
 		search = Twitter::Search.new
-		search.containing(query).result_type("recent").per_page(10)
-		end
+		return search.containing(query).result_type("recent").fetch.first
+	end
   
   def getSongQuery(tweet,hashtag)
 		return clean(tweet,hashtag)
@@ -30,18 +31,24 @@ class ApplicationController < ActionController::Base
 		getSongFromSoundCloud(query)
   end
   
-  def updateSong(tweet,hashtag)
-		song = Song.new
+	
+	def hasSong(tweet,hashtag)
 		query = getSongQuery(tweet.text,hashtag)
-		temp = nil
 		temp = getSong(query)
-		
-		
+		!temp.nil?
+	end
+	
+	def updateSong(tweet,hashtag)
+			song = Song.new
+			query = getSongQuery(tweet.text,hashtag)
+			temp = nil
+			temp = getSong(query)
 			
-		song.title = !temp.nil? ? temp.title : "nil title"
-		song.url = !temp.nil? ? temp.permalink_url : "nil link"
-		song.tweet = query
-		return song
+			song.title = !temp.nil? ? temp.title : "nil title"
+			song.url = !temp.nil? ? temp.permalink_url : "nil link"
+			song.tweet = query
+			return song
+		
 					
   end
 	
