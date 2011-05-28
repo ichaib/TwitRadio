@@ -1,4 +1,5 @@
 Twitradio::Application.routes.draw do
+<<<<<<< HEAD
   resources :musics
 
   resources :songs
@@ -7,6 +8,8 @@ Twitradio::Application.routes.draw do
   	root :to => "songs#index"
 	
 
+=======
+>>>>>>> bdad844c4b8bade3248dfe94b25bed00e3518852
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

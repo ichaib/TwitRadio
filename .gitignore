@@ -1,4 +1,17 @@
 .bundle
+<<<<<<< HEAD
 db/*.sqlite3
 log/*.log
 tmp/**/*
+=======
+db/*.sqlite3*
+log/*.log
+*.log
+/tmp/
+doc/
+*.swp
+*~
+.project
+.DS_Store
+
+>>>>>>> bdad844c4b8bade3248dfe94b25bed00e3518852

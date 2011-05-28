@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+<<<<<<< HEAD
 	require "rubygems"
 	require 'twitter'
 
@@ -42,4 +43,6 @@ class ApplicationController < ActionController::Base
 		return song			
   end
 	
+=======
+>>>>>>> bdad844c4b8bade3248dfe94b25bed00e3518852
 end
