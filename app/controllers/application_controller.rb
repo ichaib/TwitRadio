@@ -6,22 +6,21 @@ class ApplicationController < ActionController::Base
  
   def refresh
     list = Array.new
-		hashtag = "#nowplaying"
-		j=0
-		while j < 10 do
-			tweet = getTweet(hashtag)
-			if hasSong(tweet, hashtag) do
-		  	list.push(updateSong(tweet, hashtag)) 
-		  	j++
-			end
-		end
-		
+	  hashtag = "#nowplaying"
+	  j=0
+    while j < 10 do
+      tweet = getTweet(hashtag)
+      if hasSong(tweet, hashtag) do
+        list.push(updateSong(tweet, hashtag)) 
+        j++
+      end
+    end
   end
 
   def getTweet(query)
 		search = Twitter::Search.new
 		return search.containing(query).result_type("recent").fetch.first
-	end
+  end
   
   def getSongQuery(tweet,hashtag)
 		return clean(tweet,hashtag)
