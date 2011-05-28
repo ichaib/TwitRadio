@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
     list = Array.new
 	  hashtag = "#nowplaying"
 	  j=0
-    #while j < 10 do
+    while j < 10 do
       tweet = getTweet(hashtag)
       if hasSong(tweet, hashtag)== true then
         list.push(updateSong(tweet, hashtag))
         j++
       end
-    #end
+    end
   end
 
   def getTweet(query)
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 		temp = getSong(query)
 		!temp.nil?
 	end
-	def updateSong(tweet,hashtag)
+  def updateSong(tweet,hashtag)
     song = Song.new
     query = getSongQuery(tweet.text,hashtag)
     temp = getSong(query)
