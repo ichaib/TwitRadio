@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   end
   def updateSong(tweet,hashtag)
     track = Track.new
+    
     query = getSongQuery(tweet.text,hashtag)
     temp = getSong(query)
     track.title = !temp.nil? ? temp.title : ""
